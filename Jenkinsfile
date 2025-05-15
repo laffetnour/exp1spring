@@ -11,6 +11,7 @@ pipeline {
                     sh 'mvn clean install'
                 }
             }
+        }
         stage("clean up") {
             steps {
                 deleteDir()
