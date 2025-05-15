@@ -1,17 +1,11 @@
 pipeline {
     agent any
     tools {
-        maven 'maven'
+        maven 'maven-3.8.6'
         
     }
     stages {
-        stage('Build') {
-            steps {
-                dir('exp1spring') {
-                    sh 'mvn clean install'
-                }
-            }
-        }
+       
         stage("clean up") {
             steps {
                 deleteDir()
