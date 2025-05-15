@@ -1,5 +1,5 @@
 services:
   spring-boot-app:
-    image: docexpl.spring  
+    image: hello-world 
     ports:
       - "0.0.0.0:8084:8080"  
