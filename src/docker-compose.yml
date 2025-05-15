@@ -1,5 +1,0 @@
-services:
-  spring-boot-app:
-    image: hello-world 
-    ports:
-      - "0.0.0.0:8084:8080"
