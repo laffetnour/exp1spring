@@ -1,38 +1,43 @@
 pipeline {
     agent any
+
     tools {
-        maven 'maven'
-        
+        maven 'maven' 
     }
+
     stages {
-         stage('Build') {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-       
-        stage("clean up") {
+        stage('Clean Workspace') {
             steps {
                 deleteDir()
             }
         }
-        stage("Clone repo") {
+
+        stage('Clone Repository') {
             steps {
-                sh "git clone https://github.com/laffetnour/exp1spring.git"
+                sh 'git clone https://github.com/laffetnour/exp1spring.git'
             }
         }
-        stage("Generate backend image") {
+
+        stage('Build with Maven') {
             steps {
-                dir("exp1spring") {
-                    sh "mvn clean install"
-                    sh "docker build -t hello-world ."
+                dir('exp1spring') {
+                    sh 'mvn clean install'
                 }
             }
         }
-        stage("Run docker compose") {
+
+        stage('Build Docker Image') {
             steps {
-                dir("exp1spring") {
-                    sh "docker-compose up -d"
+                dir('exp1spring') {
+                    sh 'docker build -t hello-world .'
+                }
+            }
+        }
+
+        stage('Run Docker Compose') {
+            steps {
+                dir('exp1spring') {
+                    sh 'docker-compose up -d'
                 }
             }
         }
